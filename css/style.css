@@ -1,0 +1,1139 @@
+/* ==========================================================================
+   Design Tokens & Variables
+   ========================================================================== */
+:root {
+    --brand-blue: #0044cc; /* From image.png */
+    --brand-blue-dark: #003399;
+    --brand-orange: #ff7a00; /* From image.png */
+    --brand-orange-hover: #e66e00;
+    --text-main: #333333;
+    --text-light: #666666;
+    --bg-light: #f8f9fa;
+    --bg-white: #ffffff;
+    --font-stack: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+html, body {
+    overflow-x: hidden; /* Prevents the page from swiping left/right on mobile */
+    width: 100%;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* This prevents the sticky header from covering up section titles when it scrolls down */
+}
+
+/* ==========================================================================
+   Reset & Base Styles
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-stack);
+    color: var(--text-main);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+a { text-decoration: none; }
+ul { list-style: none; }
+
+.section-padding { padding: 4rem 0; }
+.bg-light { background-color: var(--bg-light); }
+.text-center { text-align: center; }
+
+/* ==========================================================================
+   Typography & Buttons
+   ========================================================================== */
+h1, h2, h3 {
+    color: var(--brand-blue);
+    margin-bottom: 1rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--brand-orange);
+    color: var(--bg-white);
+}
+
+.btn-primary:hover { background-color: var(--brand-orange-hover); }
+
+/* ==========================================================================
+   Header & Navigation (Mobile First)
+   ========================================================================== */
+.site-header {
+    background-color: rgba(255, 255, 255, 0.85); /* 85% opacity white */
+    backdrop-filter: blur(12px); /* The magic glass blur effect */
+    -webkit-backdrop-filter: blur(12px); /* For Safari support */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    position: relative; /* Needed to position the dropdown relative to the header */
+}
+
+.logo img {
+    max-height: 70px; /* Adjust this number up or down until it looks perfect to you */
+    width: auto;      /* Ensures the image doesn't get squished or stretched */
+    display: block;   /* Removes any weird phantom spacing browsers add under images */
+}
+
+/* Hamburger Button Styles */
+.mobile-menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--brand-blue);
+    cursor: pointer;
+}
+
+/* Mobile Dropdown Menu (Hidden by default) */
+.main-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-white);
+    box-shadow: 0 10px 10px rgba(0,0,0,0.05);
+    display: none; 
+}
+
+/* This class gets added by JavaScript when the button is clicked */
+.main-nav.active {
+    display: block; 
+    position: fixed; /* Changes from absolute to fixed */
+    top: 80px; /* Sits just below your header */
+    left: 0;
+    width: 100vw;
+    height: 100vh; /* Takes up the full height of the screen */
+    background-color: var(--bg-white);
+    z-index: 99;
+    padding-top: 2rem;
+}
+
+.main-nav ul {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 5%;
+    gap: 0;
+}
+
+.main-nav a {
+    display: block;
+    width: 100%;
+    padding: 1rem 0;
+    color: var(--brand-blue);
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--bg-light);
+    transition: color 0.2s ease-in-out;
+}
+
+.main-nav li:last-child a {
+    border-bottom: none; /* Removes the line under the last link */
+}
+
+.main-nav a:hover { 
+    color: var(--brand-orange); 
+}
+
+/* ==========================================================================
+   Tablet/Desktop Navigation Overrides
+   ========================================================================== */
+@media (min-width: 768px) {
+    .mobile-menu-toggle {
+        display: none; /* Hide the hamburger icon on large screens */
+    }
+    
+    .main-nav {
+        position: static; /* Put the nav back into the normal document flow */
+        display: block; /* Always show on desktop */
+        width: auto;
+        box-shadow: none;
+        background-color: transparent;
+    }
+    
+    .main-nav ul {
+        flex-direction: row;
+        align-items: center;
+        padding: 0;
+        gap: 2.5rem; /* The spacing you set earlier! */
+    }
+
+    .main-nav a {
+        border-bottom: none;
+        padding: 0.5rem 0;
+    }
+}
+
+/* ==========================================================================
+   Elite Split-Screen Hero Section
+   ========================================================================== */
+.hero-split-section {
+    background-color: #fffaf5; /* A very soft, warm off-white */
+    padding: 6rem 0;
+    overflow: hidden;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.hero-tag {
+    display: inline-block;
+    background-color: rgba(255, 122, 0, 0.1);
+    color: var(--brand-orange);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    color: var(--brand-blue-dark);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.text-highlight {
+    color: var(--brand-orange);
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-bottom: 2.5rem;
+    max-width: 90%;
+}
+
+.hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.hero-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg-white);
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.03);
+}
+
+.badge-icon {
+    background: rgba(37, 211, 102, 0.1); /* Soft green */
+    color: #25D366;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 1.2rem;
+}
+
+.badge-text strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--brand-blue-dark);
+}
+
+.badge-text span {
+    font-size: 0.75rem;
+    color: var(--text-light);
+}
+
+/* Hero Right Side Visuals */
+.hero-visual .image-wrapper {
+    position: relative;
+    border-radius: 50%; /* Creates the circular crop */
+    padding-bottom: 100%; /* Keeps it a perfect circle */
+    background-color: var(--bg-white);
+    box-shadow: 0 20px 40px rgba(0, 51, 153, 0.1);
+}
+
+.hero-visual img {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.floating-badge {
+    position: absolute;
+    top: 10%;
+    right: 0;
+    background: #25D366;
+    color: white;
+    padding: 1.5rem;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+    z-index: 2;
+    animation: floatUpDown 4s ease-in-out infinite;
+}
+
+.floating-badge strong { display: block; font-size: 1.5rem; line-height: 1; }
+.floating-badge span { font-size: 0.8rem; font-weight: 600; letter-spacing: 1px;}
+
+.floating-review {
+    position: absolute;
+    bottom: 5%;
+    left: -5%;
+    background: var(--bg-white);
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    max-width: 250px;
+    z-index: 2;
+    border-left: 4px solid var(--brand-orange);
+    animation: floatUpDown 5s ease-in-out infinite reverse;
+}
+
+.floating-review p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+.floating-review .reviewer {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--brand-blue-dark);
+}
+
+@keyframes floatUpDown {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@media (min-width: 992px) {
+    .hero-grid { grid-template-columns: 1fr 1fr; }
+    .hero-content h1 { font-size: 3.8rem; }
+}
+
+/* ==========================================================================
+   Live Stats & Accreditation Section
+   ========================================================================== */
+.stats-section {
+    background-color: var(--bg-white);
+    padding: 4rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02); /* Very soft shadow to lift it */
+    position: relative;
+    z-index: 10;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+    gap: 2rem 1rem;
+    text-align: center;
+}
+
+.stat-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.stat-number h3 {
+    font-size: 3rem;
+    color: var(--brand-blue-dark);
+    margin: 0;
+    line-height: 1;
+}
+
+.stat-number span {
+    font-size: 2rem;
+    color: var(--brand-orange);
+    font-weight: 800;
+    margin-left: 2px;
+}
+
+.stat-item p {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+/* CAC Badge Specific Styling */
+.cac-badge {
+    height: 48px; /* Matches the visual height of the numbers */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.cac-badge i {
+    font-size: 2.8rem;
+    color: #25D366; /* A trust-building green */
+    line-height: 1;
+}
+
+/* Desktop Layout */
+@media (min-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr); /* 4 columns on desktop */
+    }
+}
+
+/* ==========================================================================
+   About Section
+   ========================================================================== */
+.about-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.about-image .image-placeholder {
+    background-color: var(--brand-blue);
+    color: var(--bg-white);
+    height: 300px; /* Placeholder height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-weight: 600;
+    box-shadow: 0 10px 30px rgba(0, 0, 204, 0.1);
+}
+
+.about-img-real {
+    width: 100%;
+    height: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 204, 0.1);
+    display: block;
+}
+
+.about-content h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--brand-orange);
+    margin-bottom: 0.5rem;
+}
+
+.about-content h3 {
+    font-size: 2rem;
+    color: var(--brand-blue-dark);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.about-content p {
+    margin-bottom: 1.2rem;
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.about-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Tablet & Desktop Layout */
+@media (min-width: 768px) {
+    .about-grid {
+        flex-direction: row;
+        align-items: center;
+        gap: 4rem;
+    }
+    
+    .about-image, 
+    .about-content {
+        flex: 1; /* Splits the width exactly 50/50 */
+    }
+
+    .about-image .image-placeholder {
+        height: 400px; 
+    }
+}
+
+/* ==========================================================================
+   Trust Strip Section
+   ========================================================================== */
+.trust-section {
+    background-color: var(--brand-blue-dark);
+    color: var(--bg-white);
+    padding: 4rem 0;
+}
+
+.trust-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+}
+
+.trust-item i {
+    font-size: 3rem;
+    color: var(--brand-orange);
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.trust-item h4 {
+    color: var(--bg-white);
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.trust-item p {
+    color: rgba(255, 255, 255, 0.85); /* Slightly muted white for better readability */
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+/* Tablet & Desktop Layout */
+@media (min-width: 768px) {
+    .trust-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+}
+
+/* ==========================================================================
+   Services Section
+   ========================================================================== */
+.section-header {
+    margin-bottom: 3rem;
+}
+
+.section-header p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.service-card {
+    background-color: var(--bg-white);
+    padding: 2.5rem 2rem;
+    border-radius: 16px; /* Softer, more modern corners */
+    text-align: left; /* Shift from center to left-aligned */
+    border: 1px solid rgba(0,0,0,0.05); /* Very subtle border */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03); /* Softer, wider shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.icon-box {
+    background-color: rgba(255, 122, 0, 0.1); /* Very light transparent orange */
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.icon-box i {
+    font-size: 1.8rem;
+    color: var(--brand-orange);
+}
+
+.service-link {
+    margin-top: auto; /* Pushes link to the bottom */
+    padding-top: 1.5rem;
+    color: var(--brand-blue-dark);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+.service-link:hover {
+    color: var(--brand-orange);
+}
+
+/* Tablet Layout (2x2 Grid) */
+@media (min-width: 768px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Desktop Layout (4 columns side-by-side) */
+@media (min-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ==========================================================================
+   Portfolio / Gallery Section
+   ========================================================================== */
+.portfolio-grid {
+    display: grid;
+    /* This automatically creates a responsive grid without needing media queries! */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.portfolio-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden; /* Ensures the image doesn't break out of the rounded corners */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    aspect-ratio: 4 / 3; /* Keeps all images uniformly sized regardless of original dimensions */
+    background-color: var(--bg-light); /* Placeholder background */
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Crops images perfectly without squishing them */
+    transition: transform 0.4s ease;
+    display: block;
+}
+
+/* Hover Overlay Styles */
+.portfolio-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 51, 153, 0.85); /* Uses a transparent version of the brand blue */
+    color: var(--bg-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.portfolio-overlay span {
+    font-size: 1.2rem;
+    font-weight: 600;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+/* The Hover Effects */
+.portfolio-item:hover img {
+    transform: scale(1.05); /* Slight zoom in on the image */
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    opacity: 1; /* Fades in the blue overlay */
+}
+
+.portfolio-item:hover .portfolio-overlay span {
+    transform: translateY(0); /* Slides the text up into place */
+}
+
+/* ==========================================================================
+   Bootstrap Icons Base Styles
+   ========================================================================== */
+.service-icon i {
+    color: var(--brand-orange);
+    font-size: 2.5rem;
+}
+
+/* ==========================================================================
+   FAQ Section
+   ========================================================================== */
+.faq-accordion {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 1.5rem 0;
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+}
+
+.faq-item summary {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--brand-blue-dark);
+    cursor: pointer;
+    list-style: none; /* Hides the default browser triangle */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.2s ease;
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none; /* Hides the default triangle in Safari */
+}
+
+/* Custom Plus Icon using CSS pseudo-elements */
+.faq-item summary::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: var(--brand-orange);
+    transition: transform 0.3s ease;
+}
+
+/* Turns the Plus into a Minus when open */
+.faq-item[open] summary::after {
+    transform: rotate(45deg);
+}
+
+.faq-item summary:hover {
+    color: var(--brand-orange);
+}
+
+.faq-content {
+    padding-top: 1rem;
+    color: var(--text-light);
+    line-height: 1.6;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   Testimonials Section
+   ========================================================================== */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.testimonial-card {
+    background-color: var(--bg-white);
+    padding: 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    position: relative;
+}
+
+.testimonial-card .stars {
+    color: #FFD700; /* Classic Gold for review stars */
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.testimonial-card .quote {
+    font-size: 1.05rem;
+    color: var(--text-light);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+.testimonial-card .client-info h4 {
+    color: var(--brand-blue-dark);
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+}
+
+.testimonial-card .client-info span {
+    font-size: 0.9rem;
+    color: var(--brand-orange);
+    font-weight: 600;
+}
+
+/* Tablet & Desktop Layout */
+@media (min-width: 768px) {
+    .testimonials-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ==========================================================================
+   Final CTA Section
+   ========================================================================== */
+.cta-section {
+    background: linear-gradient(135deg, var(--brand-blue-dark), var(--brand-blue));
+    color: var(--bg-white);
+    padding: 5rem 2rem;
+    margin: 4rem auto; /* Centers the block and gives it breathing room */
+    border-radius: 16px;
+    width: 90%;
+    max-width: 1100px;
+    box-shadow: 0 20px 40px rgba(0, 51, 153, 0.15);
+}
+
+.cta-section h2 {
+    color: var(--bg-white);
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+}
+
+.cta-section p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.cta-btn-large {
+    font-size: 1.15rem;
+    padding: 1rem 2.5rem;
+    border-radius: 50px; /* Pill-shaped button for higher conversion */
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 20px rgba(255, 122, 0, 0.4);
+}
+
+.cta-btn-large:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(255, 122, 0, 0.6);
+}
+
+/* ==========================================================================
+   Lightbox Modal
+   ========================================================================== */
+.lightbox-modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9); /* Heavy dark overlay */
+    backdrop-filter: blur(5px);
+}
+
+.lightbox-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 85vh;
+    border-radius: 4px;
+    animation: zoomIn 0.3s ease;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus {
+    color: var(--brand-orange);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@keyframes zoomIn {
+    from {transform: scale(0.9)} 
+    to {transform: scale(1)}
+}
+
+/* ==========================================================================
+   Sticky WhatsApp Button & Animation
+   ========================================================================== */
+.whatsapp-sticky {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25D366; /* Standard WhatsApp Green */
+    color: white;
+    padding: 12px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: transform 0.2s ease;
+    /* This applies the continuous pulse effect */
+    animation: whatsapp-pulse 2s infinite;
+}
+
+.whatsapp-sticky:hover {
+    transform: translateY(-3px) scale(1.05); /* Slight lift and zoom on hover */
+    animation: none; /* Stops the pulse when they are hovering over it */
+}
+
+/* The Pulse Keyframes */
+@keyframes whatsapp-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+    }
+    70% {
+        /* Expands the shadow outwards and fades it out */
+        box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+}
+
+/* ==========================================================================
+   Premium Footer & ImpactDev Signature
+   ========================================================================== */
+.site-footer {
+    background-color: #1a202c; /* Deep slate, matching the Juice Bar vibe */
+    color: var(--bg-white);
+    padding: 5rem 0 2rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+.footer-logo-text {
+    color: var(--brand-orange);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+}
+
+.footer-logo-img {
+    max-width: 160px; /* Adjust this number to make the logo larger or smaller */
+    height: auto;
+    margin-bottom: 1.5rem;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.footer-logo-img:hover {
+    transform: translateY(-2px); /* Slight lift effect when clicked */
+}
+
+.footer-brand p {
+    color: #a0aec0;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+/* Social Pills */
+.footer-social-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.footer-social-pills a {
+    background: rgba(255,255,255,0.05);
+    color: #cbd5e1;
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.footer-social-pills a:hover {
+    background: var(--brand-orange);
+    color: white;
+    border-color: var(--brand-orange);
+}
+
+/* Footer Links & NAP */
+.site-footer h3 {
+    color: var(--bg-white);
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-links ul { list-style: none; padding: 0; }
+.footer-links li { margin-bottom: 0.8rem; }
+.footer-links a {
+    color: #a0aec0;
+    transition: color 0.2s ease;
+}
+.footer-links a:hover { color: var(--brand-orange); }
+
+.footer-nap p {
+    color: #a0aec0;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: flex-start;
+}
+.footer-nap i { color: var(--brand-orange); margin-right: 12px; margin-top: 4px;}
+.footer-nap a { color: var(--brand-orange); }
+
+@media (min-width: 768px) {
+    .footer-grid { grid-template-columns: 2fr 1fr 1.5fr; }
+}
+
+/* ImpactDev Signature Styles (Tailwind Translation) */
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 2rem;
+}
+
+.copyright {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+}
+
+.impactdev-signature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.signature-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.signature-divider .line {
+    width: 2rem;
+    height: 1px;
+    background-color: #334155;
+}
+
+.signature-divider .tagline {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #64748b;
+}
+
+.signature-credit {
+    font-size: 0.75rem;
+    color: #64748b;
+    letter-spacing: 0.025em;
+}
+
+.signature-credit span {
+    font-family: Georgia, serif; /* Creates that classic font-serif look */
+    color: #cbd5e1;
+    letter-spacing: normal;
+    margin-left: 4px;
+    font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   Scroll Reveal Animations
+   ========================================================================== */
+.reveal-hidden {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* ==========================================================================
+   Staggered UI Cascade Animations
+   ========================================================================== */
+
+/* Add a slightly longer transition for a smoother, premium feel */
+.reveal-hidden {
+    opacity: 0;
+    transform: translateY(40px); /* Slightly deeper drop */
+    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+                transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Services Grid Stagger */
+.services-grid .service-card:nth-child(1) { transition-delay: 0.1s; }
+.services-grid .service-card:nth-child(2) { transition-delay: 0.2s; }
+.services-grid .service-card:nth-child(3) { transition-delay: 0.3s; }
+.services-grid .service-card:nth-child(4) { transition-delay: 0.4s; }
+
+/* Trust Strip Stagger */
+.trust-grid .trust-item:nth-child(1) { transition-delay: 0.1s; }
+.trust-grid .trust-item:nth-child(2) { transition-delay: 0.25s; }
+.trust-grid .trust-item:nth-child(3) { transition-delay: 0.4s; }
+
+/* Portfolio Grid Stagger (Up to 6 visible items) */
+.portfolio-grid .portfolio-item:nth-child(1) { transition-delay: 0.1s; }
+.portfolio-grid .portfolio-item:nth-child(2) { transition-delay: 0.2s; }
+.portfolio-grid .portfolio-item:nth-child(3) { transition-delay: 0.3s; }
+.portfolio-grid .portfolio-item:nth-child(4) { transition-delay: 0.4s; }
+.portfolio-grid .portfolio-item:nth-child(5) { transition-delay: 0.5s; }
+.portfolio-grid .portfolio-item:nth-child(6) { transition-delay: 0.6s; }
+
+/* Testimonials Stagger */
+.testimonials-grid .testimonial-card:nth-child(1) { transition-delay: 0.1s; }
+.testimonials-grid .testimonial-card:nth-child(2) { transition-delay: 0.3s; }
+.testimonials-grid .testimonial-card:nth-child(3) { transition-delay: 0.5s; }
+
+/* Delay the About text slightly so the image loads first */
+.about-content.reveal-visible { transition-delay: 0.3s; }
