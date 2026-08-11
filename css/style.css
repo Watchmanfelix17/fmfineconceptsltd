@@ -1137,3 +1137,21 @@ h1, h2, h3 {
 
 /* Delay the About text slightly so the image loads first */
 .about-content.reveal-visible { transition-delay: 0.3s; }
+
+/* ==========================================================================
+   Mobile Spacing Fixes
+   ========================================================================== */
+.about-image {
+    margin-bottom: 2.5rem; /* Pushes the 'ABOUT US' text away from the bottom of the image */
+}
+
+#about {
+    padding-bottom: 5rem; /* Creates a larger gap between the About text and the blue Trust Strip */
+}
+
+/* Ensure global section padding breathes well on small screens */
+@media (max-width: 767px) {
+    .section-padding {
+        padding: 4rem 0;
+    }
+}
