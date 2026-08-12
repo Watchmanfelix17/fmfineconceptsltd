@@ -450,25 +450,28 @@ h1, h2, h3 {
     display: block;
 }
 
-.about-content h2 {
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--brand-orange);
-    margin-bottom: 0.5rem;
+.about-content {
+    text-align: center;
+    max-width: 750px; /* Prevents the text from getting too wide and hard to read */
+    margin: 0 auto; /* Centers the entire block on the page */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Forces the hero-tag pill to sit in the exact center */
+    padding: 0 1rem;
 }
 
-.about-content h3 {
-    font-size: 2rem;
+.about-content h2 {
+    font-size: 2.2rem;
     color: var(--brand-blue-dark);
     margin-bottom: 1.5rem;
-    line-height: 1.2;
+    line-height: 1.3;
 }
 
 .about-content p {
-    margin-bottom: 1.2rem;
+    font-size: 1.05rem;
+    line-height: 1.8;
     color: var(--text-light);
-    font-size: 1.1rem;
+    margin-bottom: 1.2rem;
 }
 
 .about-content p:last-child {
